@@ -1,0 +1,299 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* ========== HEADER STYLES ========== */
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  /* Fix for text cropping issue */
+  padding: 10px 0;
+  line-height: 1.2;
+  display: inline-block;
+}
+
+.subtitle {
+  color: #666;
+  margin-top: 12px;
+  font-size: 1.1rem;
+}
+
+/* ========== SEARCH CONTAINER ========== */
+.search-container {
+  max-width: 700px;
+  margin: 0 auto 24px;
+}
+
+.search-field {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+}
+
+/* ========== RESULTS INFO ========== */
+.results-info {
+  max-width: 700px;
+  margin: 0 auto 24px;
+  display: flex;
+  justify-content: center;
+}
+
+mat-chip-set {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+mat-chip mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* ========== LOADING CONTAINER ========== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  gap: 20px;
+}
+
+.loading-container p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* ========== TABLE CONTAINER ========== */
+.table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table Header */
+.user-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.user-table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Table Body */
+.user-table tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.user-table tbody tr:hover {
+  background-color: #f8f9ff;
+}
+
+.user-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.user-table td {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+/* User Info Cell (First Column) */
+.user-info-cell {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  flex-shrink: 0;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.user-username {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+/* Contact Info Cells */
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+}
+
+.contact-info mat-icon {
+  color: #667eea;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.contact-info span {
+  font-size: 0.95rem;
+}
+
+/* Company & Location Cells */
+.company-cell,
+.location-cell {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.company-cell {
+  font-weight: 500;
+}
+
+/* ========== NO RESULTS ========== */
+.no-results {
+  text-align: center;
+  padding: 80px 20px;
+  color: #999;
+  background: white;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.no-results mat-icon {
+  font-size: 80px;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.no-results h2 {
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.no-results p {
+  font-size: 1rem;
+  margin-top: 8px;
+}
+
+/* ========== PAGINATOR ========== */
+.paginator {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 1200px) {
+  .user-table {
+    font-size: 0.9rem;
+  }
+  
+  .user-table th,
+  .user-table td {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  /* Stack table cells vertically on mobile */
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .user-table {
+    min-width: 800px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .user-table {
+    font-size: 0.85rem;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}

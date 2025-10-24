@@ -1,0 +1,144 @@
+<!-- Main Container -->
+<div class="container">
+  
+  <!-- ========== HEADER SECTION ========== -->
+  <div class="header">
+    <h1>User Directory</h1>
+    <p class="subtitle">Search and browse users</p>
+  </div>
+
+  <!-- ========== SEARCH SECTION ========== -->
+  <div class="search-container">
+    <mat-form-field class="search-field" appearance="outline">
+      <mat-label>Search users by name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearchChange($event)"
+        placeholder="Type to search..."
+      />
+      <mat-icon matPrefix>search</mat-icon>
+      <button
+        mat-icon-button
+        matSuffix
+        *ngIf="searchQuery"
+        (click)="clearSearch()"
+        aria-label="Clear search"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <!-- ========== RESULTS COUNT SECTION ========== -->
+  <div class="results-info" *ngIf="!loading">
+    <mat-chip-set>
+      <mat-chip>
+        <mat-icon>people</mat-icon>
+        {{ filteredUsers.length }} user{{ filteredUsers.length !== 1 ? 's' : '' }} found
+      </mat-chip>
+      <mat-chip *ngIf="searchQuery">
+        <mat-icon>filter_alt</mat-icon>
+        Searching: "{{ searchQuery }}"
+      </mat-chip>
+    </mat-chip-set>
+  </div>
+
+  <!-- ========== LOADING SPINNER ========== -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Loading users...</p>
+  </div>
+
+  <!-- ========== USER TABLE ========== -->
+  <div *ngIf="!loading && paginatedUsers.length > 0" class="table-container">
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Website</th>
+          <th>Company</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers">
+          <td>
+            <div class="user-info-cell">
+              <div class="avatar">
+                {{ user.name.charAt(0) }}
+              </div>
+              <div class="user-details">
+                <span class="user-name">{{ user.name }}</span>
+                <span class="user-username">@{{ user.username }}</span>
+              </div>
+            </div>
+          </td>
+          
+          <!-- Email Column -->
+          <td>
+            <div class="contact-info">
+              <mat-icon>email</mat-icon>
+              <span>{{ user.email }}</span>
+            </div>
+          </td>
+          
+          <!-- Phone Column -->
+          <td>
+            <div class="contact-info">
+              <mat-icon>phone</mat-icon>
+              <span>{{ user.phone }}</span>
+            </div>
+          </td>
+          
+          <!-- Website Column -->
+          <td>
+            <div class="contact-info">
+              <mat-icon>language</mat-icon>
+              <span>{{ user.website }}</span>
+            </div>
+          </td>
+          
+          <!-- Company Column -->
+          <td class="company-cell">
+            {{ user.company.name }}
+          </td>
+          
+          <!-- Location Column -->
+          <td class="location-cell">
+            {{ user.address.city }}, {{ user.address.zipcode }}
+          </td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== NO RESULTS MESSAGE ========== -->
+  <div *ngIf="!loading && paginatedUsers.length === 0" class="no-results">
+    <mat-icon>search_off</mat-icon>
+    <h2>No users found</h2>
+    <p *ngIf="searchQuery">
+      No results matching "<strong>{{ searchQuery }}</strong>"
+    </p>
+    <p *ngIf="!searchQuery">
+      No users available at the moment.
+    </p>
+  </div>
+
+  <!-- ========== PAGINATION SECTION ========== -->
+  <mat-paginator
+    *ngIf="!loading && filteredUsers.length > 0"
+    [length]="filteredUsers.length"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPageChange($event)"
+    showFirstLastButtons
+    class="paginator"
+  >
+  </mat-paginator>
+  
+</div>
