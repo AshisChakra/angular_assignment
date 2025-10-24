@@ -64,13 +64,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  /**
-   * Angular lifecycle hook - Runs when component initializes
-   * Sets up search debouncing and reads URL parameters
-   */
   ngOnInit(): void {
-    // Setup debounced search with 300ms delay
-    // This prevents API calls on every keystroke
     const searchSub = this.searchSubject.pipe(
       debounceTime(300),           
       distinctUntilChanged()        
@@ -80,8 +74,6 @@ export class AppComponent implements OnInit, OnDestroy {
     
     this.subscriptions.add(searchSub);
 
-    // Subscribe to URL query parameters for shareable state
-    // This allows users to share filtered/paginated views via URL
     const paramsSub = this.route.queryParams.subscribe(params => {
       this.searchQuery = params['search'] || '';
       this.pageIndex = parseInt(params['page']) || 0;
