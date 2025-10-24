@@ -91,18 +91,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.add(paramsSub);
   }
 
-  /**
-   * Angular lifecycle hook - Runs when component is destroyed
-   * Cleans up all subscriptions to prevent memory leaks
-   */
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  /**
-   * Fetches user data from API via UserService
-   * Updates loading state and handles errors
-   */
   loadUsers(): void {
     this.loading = true;
     const usersSub = this.userService.getUsers().subscribe({
@@ -122,17 +114,12 @@ export class AppComponent implements OnInit, OnDestroy {
   /**
    * Handles search input changes
    * Emits search term to debounced subject
-   * @param searchTerm - Current value of search input
    */
   onSearchChange(searchTerm: string): void {
     this.searchQuery = searchTerm;
     this.searchSubject.next(searchTerm);
   }
 
-  /**
-   * Performs the actual search operation
-   * Resets pagination to first page and updates URL
-   */
   performSearch(searchTerm: string): void {
     this.pageIndex = 0;
     this.updateUrl();
@@ -145,7 +132,6 @@ export class AppComponent implements OnInit, OnDestroy {
    * Then updates pagination
    */
   filterUsers(): void {
-    // If search query is empty, show all users
     if (!this.searchQuery.trim()) {
       this.filteredUsers = [...this.users];
     } else {
@@ -164,15 +150,9 @@ export class AppComponent implements OnInit, OnDestroy {
   updatePagination(): void {
     const startIndex = this.pageIndex * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    
-    // Slice filtered users to get current page items
     this.paginatedUsers = this.filteredUsers.slice(startIndex, endIndex);
   }
 
-  /**
-   * Handles pagination events from mat-paginator
-   * Updates page settings and refreshes display
-   */
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
